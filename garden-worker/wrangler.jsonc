@@ -1,0 +1,34 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "garden-worker",
+	"main": "src/index.ts",
+	"compatibility_date": "2026-06-23",
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"vars": {
+		"GOOGLE_CLIENT_ID": "819674622809-gr3n3b31mfa5krr18pjdmnovuskspbic.apps.googleusercontent.com"
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "garden-db",
+			"database_id": "REPLACE_WITH_D1_DATABASE_ID",
+			"migrations_dir": "migrations"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "PHOTOS_BUCKET",
+			"bucket_name": "garden-photos"
+		}
+	]
+}
