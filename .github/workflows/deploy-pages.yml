@@ -40,6 +40,9 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          VITE_GOOGLE_CLIENT_ID: 819674622809-gr3n3b31mfa5krr18pjdmnovuskspbic.apps.googleusercontent.com
+          VITE_API_BASE_URL: https://garden-worker.snack-bunker.workers.dev
 
       - uses: actions/configure-pages@v4
 
