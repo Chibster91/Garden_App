@@ -1,96 +1,368 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap");
+/* Garden Companion App — Global Styles
+   Tokens are inlined from the Garden Companion Design System.
+   All custom properties follow the design system's naming conventions. */
+
+/* ── Web fonts (Lora display + Nunito body) ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Nunito:wght@400;500;600;700&display=swap');
 
 :root {
-	--bg: #eef2e7;
-	--surface: #fbf9f2;
-	--header: #7e9678;
-	--header-dark: #6c8366;
-	--text: #243321;
-	--text-muted: #7d8a73;
-	--border: #e1ddc9;
-	--accent: #5f7a56;
-	--accent-light: #b9c9ad;
-	--tan: #f1ecdd;
-	--tan-border: #d9cfae;
+  /* ── Base color palette ──────────────────────────────────────────────── */
 
-	--font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
-	--font-sans: system-ui, "Segoe UI", Roboto, sans-serif;
+  /* Sage greens */
+  --color-sage-50:  #f3f6f0;
+  --color-sage-100: #e8eee3;
+  --color-sage-200: #d8e2d3;
+  --color-sage-300: #b8ccb0;
+  --color-sage-400: #81c784;
+  --color-sage-500: #4caf50;
+  --color-sage-600: #2e7d32;
+  --color-sage-700: #1b5e20;
 
-	font: 16px/1.5 var(--font-sans);
-	color-scheme: light;
-	color: var(--text);
-	background: var(--bg);
-	-webkit-font-smoothing: antialiased;
+  /* Forest darks */
+  --color-forest-900: #1b2417;
+  --color-forest-700: #5a6b54;
+  --color-forest-500: #7a9272;
+  --color-forest-300: #a8bda0;
+
+  /* Soil / cream */
+  --color-soil-50:  #faf6f1;
+  --color-soil-100: #f5ede1;
+  --color-soil-200: #e8d9c8;
+  --color-soil-400: #c4956a;
+  --color-soil-600: #8b5e3c;
+
+  /* Harvest / amber */
+  --color-harvest-100: #fff8e1;
+  --color-harvest-300: #ffe082;
+  --color-harvest-500: #f9a825;
+  --color-harvest-700: #e65100;
+
+  /* Sky / blue */
+  --color-sky-50:  #f0f7ff;
+  --color-sky-100: #e1f0fb;
+  --color-sky-400: #64b5f6;
+
+  /* Blossom / rose */
+  --color-blossom-100: #fce4ec;
+  --color-blossom-400: #f48fb1;
+  --color-blossom-600: #c2185b;
+
+  /* Error */
+  --color-error-50:  #fef2f2;
+  --color-error-500: #c62828;
+
+  /* Cream / parchment */
+  --color-cream-50:  #FDFAF3;
+  --color-cream-100: #F7F1E5;
+  --color-cream-200: #FFFDF7;
+  --color-cream-300: #EFF5EA;
+
+  /* Gold / amber */
+  --color-gold-300: #F6D8B4;
+  --color-gold-400: #D7A86E;
+  --color-gold-600: #B36F4A;
+
+  /* ── Semantic color tokens ───────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --bg:       #F7F1E5;
+  --bg-warm:  var(--color-soil-50);
+  --bg-sky:   var(--color-sky-50);
+
+  /* Surfaces */
+  --surface:        #FFFDF7;
+  --surface-tinted: #DDE8D6;
+  --surface-warm:   var(--color-cream-300);
+
+  /* Text */
+  --text:          #243528;
+  --text-muted:    #687766;
+  --text-faint:    var(--color-forest-500);
+  --text-on-accent: #ffffff;
+
+  /* Borders */
+  --border:        #D9E2D0;
+  --border-strong: var(--color-sage-300);
+
+  /* Accent */
+  --accent:        #35513B;
+  --accent-light:  #8EA783;
+  --accent-subtle: #DDE8D6;
+  --accent-hover:  var(--color-sage-700);
+
+  /* Gold */
+  --gold:          #D7A86E;
+  --gold-subtle:   #F6D8B4;
+  --warning-color: #B36F4A;
+
+  /* Feedback */
+  --error:    var(--color-error-500);
+  --error-bg: var(--color-error-50);
+
+  /* Stage / growth status */
+  --status-seedling:   var(--color-sage-400);
+  --status-vegetative: var(--color-sage-600);
+  --status-flowering:  var(--color-blossom-400);
+  --status-fruiting:   var(--color-harvest-500);
+  --status-harvested:  var(--color-harvest-700);
+  --status-removed:    var(--color-forest-300);
+
+  /* Journal entry type tints */
+  --entry-observation: var(--color-sky-100);
+  --entry-pest:        var(--color-blossom-100);
+  --entry-harvest:     var(--color-harvest-100);
+  --entry-action:      var(--color-sage-100);
+  --entry-note:        var(--color-soil-100);
+
+  /* Seed status badge tints */
+  --seed-unopened: var(--color-sage-100);
+  --seed-opened:   var(--color-harvest-100);
+  --seed-low:      var(--color-blossom-100);
+  --seed-empty:    var(--color-forest-300);
+
+  /* ── Typography tokens ───────────────────────────────────────────────── */
+
+  --font-display: 'Lora', Georgia, 'Times New Roman', serif;
+  --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-mono:    'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* Backward-compat aliases used in app components */
+  --font-serif: var(--font-display);
+  --font-sans:  var(--font-body);
+
+  /* Size scale */
+  --text-xs:   0.75rem;
+  --text-sm:   0.8125rem;
+  --text-base: 0.875rem;
+  --text-md:   1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.75rem;
+  --text-4xl:  2rem;
+
+  /* Weights */
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line heights */
+  --leading-tight:   1.25;
+  --leading-snug:    1.375;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.625;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.04em;
+  --tracking-wider:   0.08em;
+
+  /* ── Spacing tokens (4px base grid) ─────────────────────────────────── */
+
+  --space-0:  0px;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+
+  /* Semantic layout */
+  --page-px:        var(--space-4);
+  --page-py:        var(--space-4);
+  --max-width-app:  480px;
+
+  /* Cards */
+  --card-px:        var(--space-3);
+  --card-py:        var(--space-3);
+  --card-gap:       var(--space-2);
+
+  /* Form fields */
+  --field-px:       var(--space-3);
+  --field-py:       var(--space-2);
+  --field-gap:      var(--space-1);
+  --form-gap:       var(--space-4);
+
+  /* Buttons */
+  --btn-px:         var(--space-4);
+  --btn-py:         var(--space-2);
+  --btn-min-height: 44px;
+
+  /* List items */
+  --list-gap:       var(--space-2);
+  --list-item-px:   var(--space-3);
+  --list-item-py:   var(--space-2);
+
+  /* Nav */
+  --nav-height:     64px;
+  --nav-py:         var(--space-3);
+  --section-gap:    var(--space-4);
+
+  /* ── Effects tokens ──────────────────────────────────────────────────── */
+
+  /* Radii */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   22px;
+  --radius-xl:   28px;
+  --radius-2xl:  36px;
+  --radius-full: 9999px;
+
+  /* Borders */
+  --border-width:   1px;
+  --border-default: 1px solid var(--border);
+  --border-strong:  1px solid var(--color-sage-300);
+  --border-accent:  1px solid var(--accent-light);
+
+  /* Shadows (warm green-black base) */
+  --shadow-xs: 0 2px 8px rgba(40, 63, 44, 0.06);
+  --shadow-sm: 0 5px 16px rgba(40, 63, 44, 0.07);
+  --shadow-md: 0 8px 24px rgba(40, 63, 44, 0.10);
+  --shadow-lg: 0 12px 40px rgba(40, 63, 44, 0.14),
+               0 4px  12px rgba(40, 63, 44, 0.06);
+
+  /* Focus rings */
+  --focus-ring:       0 0 0 3px rgba(46, 125, 50, 0.25);
+  --focus-ring-error: 0 0 0 3px rgba(198, 40, 40, 0.20);
+
+  /* Transitions */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 350ms;
+
+  --transition-color:     color var(--duration-fast) var(--ease-in-out),
+                          background-color var(--duration-fast) var(--ease-in-out),
+                          border-color var(--duration-fast) var(--ease-in-out);
+  --transition-shadow:    box-shadow var(--duration-base) var(--ease-out);
+  --transition-transform: transform var(--duration-fast) var(--ease-out);
+
+  --opacity-disabled: 0.45;
+  --opacity-muted:    0.65;
+
+  /* ── App-specific tokens ─────────────────────────────────────────────── */
+
+  /* Header / nav bar (sage-green chrome) */
+  --header:      #7e9678;
+  --header-dark: #6c8366;
+
+  /* Backward-compat: .pill used --tan / --tan-border; now maps to design system */
+  --tan:        var(--accent-subtle);
+  --tan-border: var(--border);
 }
 
-* {
-	box-sizing: border-box;
+/* ── Base reset ──────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
-	margin: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: light;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
-	min-height: 100svh;
-	display: flex;
-	flex-direction: column;
-	max-width: 480px;
-	margin: 0 auto;
-	background: var(--bg);
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width-app);
+  margin: 0 auto;
+  background:
+    radial-gradient(circle at 100% 0%, rgba(142,167,131,.25), transparent 34%),
+    radial-gradient(circle at 0% 20%, rgba(215,168,110,.14), transparent 30%),
+    var(--bg);
 }
 
-button {
-	font: inherit;
-}
+/* ── Typography ──────────────────────────────────────────────────────────── */
 
 h1,
 h2,
 h3 {
-	font-family: var(--font-serif);
-	font-weight: 700;
-	margin: 0;
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  margin: 0;
+}
+
+/* ── Interactive elements ────────────────────────────────────────────────── */
+
+button {
+  font: inherit;
+  cursor: pointer;
 }
 
 input,
 select,
 textarea {
-	font: inherit;
-	border: 1px solid var(--border);
-	border-radius: 8px;
-	padding: 8px 10px;
-	background: var(--surface);
-	color: var(--text);
+  font: inherit;
+  border: var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--field-py) var(--field-px);
+  background: var(--surface);
+  color: var(--text);
+  transition: var(--transition-color), var(--transition-shadow);
+  width: 100%;
 }
 
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-light);
+  box-shadow: var(--focus-ring);
+}
+
+/* ── Utility classes ─────────────────────────────────────────────────────── */
+
 .card {
-	background: var(--surface);
-	border: 1px solid var(--border);
-	border-radius: 18px;
-	padding: 16px;
-	box-shadow: 0 1px 2px rgba(36, 51, 33, 0.06);
+  background: var(--surface);
+  border: var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--card-py) var(--card-px);
+  box-shadow: var(--shadow-sm);
 }
 
 .icon-badge {
-	width: 34px;
-	height: 34px;
-	min-width: 34px;
-	border-radius: 50%;
-	background: var(--accent);
-	color: #fff;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 16px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }
 
 .pill {
-	display: inline-flex;
-	align-items: center;
-	padding: 3px 12px;
-	border-radius: 999px;
-	background: var(--tan);
-	border: 1px solid var(--tan-border);
-	font-size: 13px;
-	color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+  background: var(--accent-subtle);
+  border: var(--border-default);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  color: var(--accent);
 }

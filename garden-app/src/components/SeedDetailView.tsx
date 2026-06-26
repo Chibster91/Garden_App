@@ -11,9 +11,9 @@ interface SeedDetailViewProps {
 function Row({ label, value }: { label: string; value: string | null }) {
 	if (!value) return null;
 	return (
-		<div style={{ display: "flex", justifyContent: "space-between", gap: 12 }}>
-			<span style={{ color: "var(--text-muted)" }}>{label}:</span>
-			<span style={{ textAlign: "right" }}>{value}</span>
+		<div style={{ display: "flex", justifyContent: "space-between", gap: 4, marginBottom: 1 }}>
+			<span style={{ color: "#687766", fontSize: 11.5 }}>{label}</span>
+			<span style={{ color: "#243528", fontWeight: 600, textAlign: "right", maxWidth: "58%", fontSize: 11.5 }}>{value}</span>
 		</div>
 	);
 }
@@ -28,12 +28,13 @@ function Section({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="card" style={{ display: "flex", flexDirection: "column", gap: 8, flex: 1, minWidth: 0 }}>
-			<div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-				<span className="icon-badge">{icon}</span>
-				<strong style={{ fontFamily: "var(--font-serif)" }}>{title}</strong>
+		<div style={{ background: "#F8F4EC", border: "1px solid #D9E2D0", borderRadius: 22, padding: 13, boxShadow: "0 3px 10px rgba(36,53,40,.09)", display: "flex", flexDirection: "column", gap: 7, flex: 1, minWidth: 0, position: "relative", overflow: "hidden" }}>
+			<div style={{ display: "flex", alignItems: "center", gap: 7, marginBottom: 3 }}>
+				<div style={{ width: 28, height: 28, borderRadius: 8, background: "#35513B", display: "grid", placeItems: "center", fontSize: 11, color: "#fff", fontWeight: 800, flexShrink: 0 }}>{icon}</div>
+				<span style={{ fontFamily: "Lora, Georgia, serif", fontSize: 13, fontWeight: 700, color: "#243528" }}>{title}</span>
 			</div>
-			<div style={{ display: "flex", flexDirection: "column", gap: 6, fontSize: 14 }}>{children}</div>
+			<div style={{ borderTop: "1px dashed #D9E2D0", marginBottom: 3 }} />
+			<div style={{ display: "flex", flexDirection: "column", gap: 4, fontSize: 12 }}>{children}</div>
 		</div>
 	);
 }
@@ -48,51 +49,29 @@ export function SeedDetailView({ seed, onBack, onEdit }: SeedDetailViewProps) {
 	const photoUrl = usePhotoUrl(seed.photoFrontKey);
 
 	return (
-		<div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-			<div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-				<button
-					type="button"
-					onClick={onBack}
-					aria-label="Back"
-					style={{ background: "none", border: "none", fontSize: 20, cursor: "pointer", padding: 0 }}
-				>
-					←
-				</button>
-				<h2 style={{ flex: 1 }}>Seed Details</h2>
-			</div>
-
-			<div className="card" style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+		<div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+			<div style={{ background: "#F8F4EC", border: "1px solid #D9E2D0", borderRadius: 22, padding: 14, boxShadow: "0 3px 10px rgba(36,53,40,.09)", display: "flex", flexDirection: "column", gap: 12 }}>
 				<div style={{ display: "flex", gap: 12 }}>
-					<div
-						style={{
-							width: 96,
-							height: 120,
-							borderRadius: 10,
-							background: photoUrl ? undefined : "var(--border)",
-							flexShrink: 0,
-							overflow: "hidden",
-						}}
-					>
-						{photoUrl && (
-							<img
-								src={photoUrl}
-								alt={seed.plantName}
-								style={{ width: "100%", height: "100%", objectFit: "cover" }}
-							/>
+					<div style={{ width: 106, height: 136, flexShrink: 0, borderRadius: 13, border: "1.5px dashed #D9E2D0", background: photoUrl ? undefined : "linear-gradient(145deg,#F0EBE0,#E8E2D4)", overflow: "hidden", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 5 }}>
+						{photoUrl ? (
+							<img src={photoUrl} alt={seed.plantName} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+						) : (
+							<>
+								<span style={{ fontSize: 34 }}>🌱</span>
+								<span style={{ fontSize: 10, color: "#687766", textAlign: "center", padding: "0 5px", lineHeight: 1.3 }}>Packet photo</span>
+							</>
 						)}
 					</div>
-					<div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-						<h2 style={{ fontSize: 26 }}>{seed.plantName}</h2>
+					<div style={{ flex: 1, minWidth: 0 }}>
+						<div style={{ fontFamily: "Lora, Georgia, serif", fontSize: 22, fontWeight: 700, color: "#243528", lineHeight: 1, marginBottom: 2 }}>{seed.plantName}</div>
 						{seed.variety && (
-							<span style={{ fontStyle: "italic", color: "var(--accent)", fontFamily: "var(--font-serif)" }}>
-								{seed.variety}
-							</span>
+							<div style={{ fontFamily: "Lora, Georgia, serif", fontSize: 13.5, fontStyle: "italic", color: "#687766", marginBottom: 10 }}>{seed.variety}</div>
 						)}
 						<div style={{ marginTop: 8, display: "flex", flexDirection: "column", gap: 6, fontSize: 14 }}>
 							{seed.brand && <Row label="Brand" value={seed.brand} />}
-							<div style={{ display: "flex", justifyContent: "space-between" }}>
-								<span style={{ color: "var(--text-muted)" }}>Status:</span>
-								<span className="pill">{SEED_STATUS_LABELS[seed.status]}</span>
+							<div style={{ display: "flex", justifyContent: "space-between", gap: 4, marginBottom: 1 }}>
+								<span style={{ color: "#687766", fontSize: 11.5 }}>Status</span>
+								<span style={{ display: "inline-block", padding: "2px 8px", borderRadius: 999, fontSize: 11, fontWeight: 800, background: "#DDE8D6", color: "#35513B" }}>{SEED_STATUS_LABELS[seed.status]}</span>
 							</div>
 							{seed.year != null && <Row label="Year packed" value={String(seed.year)} />}
 							{seed.quantity != null && <Row label="Quantity left" value={String(seed.quantity)} />}
@@ -100,19 +79,12 @@ export function SeedDetailView({ seed, onBack, onEdit }: SeedDetailViewProps) {
 					</div>
 				</div>
 
-				<div
-					style={{
-						display: "flex",
-						alignItems: "center",
-						gap: 8,
-						borderTop: "1px solid var(--border)",
-						paddingTop: 12,
-						color: "var(--text-muted)",
-						fontSize: 14,
-					}}
-				>
-					<span>📷</span>
-					<span>{seed.photoFrontKey || seed.photoBackKey ? "Packet photos saved" : "No packet photos yet"}</span>
+				<div style={{ display: "flex", alignItems: "center", gap: 10, borderTop: "1px solid #D9E2D0", paddingTop: 12 }}>
+					<div style={{ width: 36, height: 36, borderRadius: 10, background: "#DDE8D6", display: "grid", placeItems: "center", flexShrink: 0 }}>📷</div>
+					<div style={{ flex: 1 }}>
+						<div style={{ fontSize: 12, fontWeight: 700, color: "#243528" }}>{seed.photoFrontKey || seed.photoBackKey ? "Packet photos saved" : "No packet photos yet"}</div>
+						<div style={{ fontSize: 11, color: "#687766" }}>{seed.photoFrontKey && seed.photoBackKey ? "Front & back" : seed.photoFrontKey ? "Front only" : "—"}</div>
+					</div>
 				</div>
 			</div>
 
@@ -164,11 +136,11 @@ export function SeedDetailView({ seed, onBack, onEdit }: SeedDetailViewProps) {
 			</div>
 
 			{seed.notes && (
-				<div className="card" style={{ display: "flex", gap: 10 }}>
-					<span className="icon-badge">📋</span>
+				<div style={{ background: "#F8F4EC", border: "1px solid #D9E2D0", borderRadius: 22, padding: 13, boxShadow: "0 3px 10px rgba(36,53,40,.09)", display: "flex", gap: 10 }}>
+					<div style={{ width: 30, height: 30, borderRadius: 8, background: "#DDE8D6", display: "grid", placeItems: "center", flexShrink: 0 }}>📋</div>
 					<div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
-						<strong style={{ fontFamily: "var(--font-serif)" }}>Notes</strong>
-						<p style={{ margin: 0, fontSize: 14, whiteSpace: "pre-wrap" }}>{seed.notes}</p>
+						<strong style={{ fontFamily: "Lora, Georgia, serif", fontSize: 12.5, color: "#243528" }}>Notes</strong>
+						<p style={{ margin: 0, fontSize: 12, color: "#687766", lineHeight: 1.5, whiteSpace: "pre-wrap" }}>{seed.notes}</p>
 					</div>
 				</div>
 			)}
@@ -176,15 +148,7 @@ export function SeedDetailView({ seed, onBack, onEdit }: SeedDetailViewProps) {
 			<button
 				type="button"
 				onClick={onEdit}
-				style={{
-					padding: "12px 0",
-					borderRadius: 999,
-					border: "1px solid var(--header-dark)",
-					background: "var(--header)",
-					color: "#fff",
-					fontSize: 16,
-					cursor: "pointer",
-				}}
+				style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, padding: "12px 20px", borderRadius: 22, background: "transparent", color: "#35513B", fontSize: 15, fontWeight: 700, border: "1.5px solid #35513B", minHeight: 50, width: "100%", cursor: "pointer" }}
 			>
 				✏️ Edit Details
 			</button>

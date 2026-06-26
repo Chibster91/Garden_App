@@ -7,11 +7,11 @@ interface NavItem {
 }
 
 const NAV_ITEMS: NavItem[] = [
-	{ key: "today", label: "Home", icon: "🏡" },
-	{ key: "planted", label: "Garden", icon: "🗓️" },
-	{ key: "seeds", label: "My Seeds", icon: "🌱" },
-	{ key: "journal", label: "Journal", icon: "📓" },
-	{ key: "profile", label: "Profile", icon: "👤" },
+	{ key: "today",   label: "Home",     icon: "🏡" },
+	{ key: "planted", label: "Garden",   icon: "🪴" },
+	{ key: "seeds",   label: "My Seeds", icon: "🌱" },
+	{ key: "journal", label: "Journal",  icon: "📓" },
+	{ key: "profile", label: "Profile",  icon: "👤" },
 ];
 
 interface BottomNavProps {
@@ -23,10 +23,16 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
 	return (
 		<nav
 			style={{
-				display: "flex",
-				justifyContent: "space-around",
-				padding: "10px 8px",
-				background: "var(--header)",
+				display: "grid",
+				gridTemplateColumns: "repeat(5, 1fr)",
+				gap: 2,
+				padding: "5px 6px calc(5px + env(safe-area-inset-bottom))",
+				height: "calc(68px + env(safe-area-inset-bottom))",
+				background: "rgba(248, 244, 236, 0.97)",
+				borderTop: "1px solid var(--border)",
+				backdropFilter: "blur(16px)",
+				WebkitBackdropFilter: "blur(16px)",
+				flexShrink: 0,
 			}}
 		>
 			{NAV_ITEMS.map((item) => {
@@ -40,17 +46,22 @@ export function BottomNav({ active, onChange }: BottomNavProps) {
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
-							gap: 2,
-							padding: "8px 10px",
-							borderRadius: 14,
+							justifyContent: "center",
+							gap: 3,
+							padding: "3px 2px",
+							borderRadius: 15,
 							border: "none",
-							background: isActive ? "var(--surface)" : "transparent",
-							color: isActive ? "var(--text)" : "#fff",
+							background: isActive ? "var(--accent-subtle)" : "transparent",
+							color: isActive ? "var(--accent)" : "var(--text-muted)",
 							cursor: "pointer",
+							fontSize: 10,
+							fontWeight: 700,
+							fontFamily: "var(--font-body)",
+							transition: "background 0.15s",
 						}}
 					>
-						<span style={{ fontSize: 18 }}>{item.icon}</span>
-						<span style={{ fontSize: 11 }}>{item.label}</span>
+						<span style={{ fontSize: 21, lineHeight: 1 }}>{item.icon}</span>
+						{item.label}
 					</button>
 				);
 			})}

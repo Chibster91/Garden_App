@@ -7,18 +7,9 @@ import { JournalView } from "./components/JournalView";
 import { TasksView } from "./components/TasksView";
 import { TodayView } from "./components/TodayView";
 import { ProfileView } from "./components/ProfileView";
-import { AppHeader } from "./components/AppHeader";
 import { BottomNav } from "./components/BottomNav";
 import type { AppView } from "./types";
 
-const VIEW_TITLES: Record<AppView, string> = {
-	today: "Garden Companion",
-	planted: "Garden",
-	seeds: "My Seeds",
-	journal: "Journal",
-	tasks: "Tasks",
-	profile: "Profile",
-};
 
 export default function App() {
 	const { user, isLoading, error, renderSignInButton, signOut } = useAuth();
@@ -39,14 +30,17 @@ export default function App() {
 		);
 	}
 
-	const showBottomNav = view !== "tasks";
-	const showBackHeader = view === "tasks";
-
 	return (
-		<div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
-			{showBackHeader && <AppHeader title={VIEW_TITLES[view]} onBack={() => setView("today")} />}
-			<main style={{ flex: 1, padding: 16, overflowY: "auto" }}>
-				{view === "today" && <TodayView onManageTasks={() => setView("tasks")} />}
+		<div style={{ display: "flex", flexDirection: "column", flex: 1, overflow: "hidden" }}>
+			<main style={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+				{view === "today" && (
+					<TodayView
+						onManageTasks={() => setView("tasks")}
+						onAddJournal={() => setView("journal")}
+						onAddPlanted={() => setView("planted")}
+						onAddSeed={() => setView("seeds")}
+					/>
+				)}
 				{view === "seeds" && (
 					<SeedCatalogView
 						onPlantSeed={(seedId) => {
@@ -71,10 +65,10 @@ export default function App() {
 						onConsumeInitialPlantedId={() => setJournalPlantedId(null)}
 					/>
 				)}
-				{view === "tasks" && <TasksView />}
+				{view === "tasks" && <TasksView onBack={() => setView("today")} />}
 				{view === "profile" && <ProfileView user={user} onSignOut={signOut} />}
 			</main>
-			{showBottomNav && <BottomNav active={view} onChange={setView} />}
+			{view !== "tasks" && <BottomNav active={view} onChange={setView} />}
 		</div>
 	);
 }

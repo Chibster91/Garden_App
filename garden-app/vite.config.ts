@@ -2,8 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-export default defineConfig({
-  base: '/',
+export default defineConfig(({ command }) => ({
+  base: command === 'build' ? '/Garden_App/' : '/',
   server: {
     host: true,
   },
@@ -17,10 +17,10 @@ export default defineConfig({
         short_name: 'Garden',
         description: 'Track seeds, active plants, and daily garden tasks',
         theme_color: '#7e9678',
-        background_color: '#eef2e7',
+        background_color: '#F7F1E5',
         display: 'standalone',
-        start_url: '/',
-        scope: '/',
+        start_url: '/Garden_App/',
+        scope: '/Garden_App/',
         icons: [
           {
             src: 'pwa-192.png',

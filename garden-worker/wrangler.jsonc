@@ -21,7 +21,7 @@
 		{
 			"binding": "DB",
 			"database_name": "garden-db",
-			"database_id": "REPLACE_WITH_D1_DATABASE_ID",
+			"database_id": "9320eb02-cefe-4655-841f-9284bdb6a9a1",
 			"migrations_dir": "migrations"
 		}
 	],
