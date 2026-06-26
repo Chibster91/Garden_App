@@ -45,7 +45,7 @@ function rangeText(min: number | null, max: number | null, unit: string): string
 	return `${min ?? max} ${unit}`;
 }
 
-export function SeedDetailView({ seed, onBack, onEdit }: SeedDetailViewProps) {
+export function SeedDetailView({ seed, onBack: _onBack, onEdit }: SeedDetailViewProps) {
 	const photoUrl = usePhotoUrl(seed.photoFrontKey);
 
 	return (

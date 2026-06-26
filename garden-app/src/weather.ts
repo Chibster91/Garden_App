@@ -12,11 +12,13 @@ export const MOON_PHASE_NAMES = [
 	"Waning Crescent",
 ] as const;
 
-export function getMoonPhase(date: Date): { age: number; name: string } {
+const MOON_PHASE_EMOJIS = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"] as const;
+
+export function getMoonPhase(date: Date): { age: number; name: string; emoji: string } {
 	const diffDays = (date.getTime() - KNOWN_NEW_MOON_UTC) / 86400000;
 	const age = ((diffDays % SYNODIC_MONTH_DAYS) + SYNODIC_MONTH_DAYS) % SYNODIC_MONTH_DAYS;
 	const index = Math.round((age / SYNODIC_MONTH_DAYS) * 8) % 8;
-	return { age, name: MOON_PHASE_NAMES[index] };
+	return { age, name: MOON_PHASE_NAMES[index], emoji: MOON_PHASE_EMOJIS[index] };
 }
 
 export type Season = "Winter" | "Spring" | "Summer" | "Autumn";
